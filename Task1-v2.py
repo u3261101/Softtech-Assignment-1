@@ -9,38 +9,37 @@ current Australian population and that one year has 365 days.
 Input : Amount of years to predict population for
 Process :
 ----------------
-Count timer - every few seconds add a point to death, birth, immigration (timer%DBI?)
-Total = (immi+birth)-death
+Count population growth per second, multiplied by seconds per year
 ----------------
 Output : Total population after certain amount of years
 '''
 
 
-Population = 25000000
+Population = 26277169
 Time = 0
 minutes_per_year = 60*24*365
-Deaths = 13/60 * minutes_per_year
-Births = 7/60 * minutes_per_year
-Immigrations = 45/60 * minutes_per_year
-End_Population = Population+((Immigrations+Births)-Deaths)
-Years = 5
+Births_per_minute = 60/7 * minutes_per_year
+Deaths_per_minute = 60/13 * minutes_per_year
+Immigrations_per_minute = 60/45 * minutes_per_year
+End_Population = Population+((Immigrations_per_minute+Births_per_minute)-Deaths_per_minute)
+Years = 1
 
 start = True
-
 
 while start:
     Time+=1
 
-    End_Population = Population+((((Immigrations+Births)-Deaths))*Years)
+    End_Population = Population+((((Immigrations_per_minute+Births_per_minute)-Deaths_per_minute))*Years)
     print('----------')
     print(Time)
-    print(Births)
-    print(Deaths)
-    print(Immigrations)
-    print(f'{End_Population:,}')
+    print(Births_per_minute)
+    print(Deaths_per_minute)
+    print(Immigrations_per_minute)
+    Years+=1
+    print(f'Year {Time}: {End_Population:,}')
     print('----------')
  #38,140,000, 38,928,400, 38,899,200
-    if Time == 1:
+    if Time == 5:
         start = False
 
 
