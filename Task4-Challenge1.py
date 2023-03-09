@@ -7,29 +7,24 @@ their slowest lap, and their average lap time
 
 
 import tkinter
+from tkinter import simpledialog
 
 class myGUI:
     def __init__(self):
         self.main_window = tkinter.Tk()
         self.main_window.title("Lap Timer Tool")
 
-
-        num_of_laps = 0
-        lap_times = []
         #create frames
         self.lap_num_frame = tkinter.Frame()
-        self.lap_time_frame = tkinter.Frame()
         self.button_frame = tkinter.Frame()
         self.result_frame = tkinter.Frame()
 
         #create label and entry
         self.lap_num_label = tkinter.Label(self.lap_num_frame, text = "Enter the number of laps completed: ")
         self.lap_num_entry = tkinter.Entry(self.lap_num_frame)
-        self.lap_time_label = tkinter.Label(self.lap_time_frame, text = f"Enter lap {num_of_laps} time: ")
-        self.lap_time_entry = tkinter.Entry(self.lap_time_frame)
         
         #create buttons
-        display_button = tkinter.Button(self.button_frame, text = "Calculate Sum", command= self.display)
+        display_button = tkinter.Button(self.button_frame, text = "Calculate", command= self.display)
         quit_button = tkinter.Button(self.button_frame, text = "Quit", command= self.main_window.destroy)
 
         #create text box
@@ -38,15 +33,12 @@ class myGUI:
         #pack labels, entry, buttons and text box
         self.lap_num_label.pack(side='left')
         self.lap_num_entry.pack(side='left')
-        self.lap_time_label.pack(side='left')
-        self.lap_time_entry.pack(side='left')
         display_button.pack(side='left')
         quit_button.pack(side='left')
         self.results_tb.pack()
 
         #pack frames
         self.lap_num_frame.pack()
-        self.lap_time_frame.pack()
         self.button_frame.pack()
         self.result_frame.pack()
         
@@ -55,38 +47,37 @@ class myGUI:
 
     #take user input and display the result
     def display(self):
-        # result_string = ""
+        #clear the text box
+        self.results_tb.delete('1.0', 'end')
+        
+        result_string = ""
 
-        # #clears the text box every time new entrys are displayed
-        # self.results_tb.delete('1.0', tkinter.END)
-
-        # lap_num = int(self.lap_num_entry.get())
-        # lap_time = int(self.lap_time_entry.get())
-               
-
-        # result_string = f"The quiz marks for ST1 unit is {...}"
-        # self.results_tb.insert('1.0', result_string)
         num_of_laps = int(self.lap_num_entry.get())
         lap_times = []
-        for num in range(num_of_laps):
-            
-            for time in range(lap_times):
-                lap_time = (simpledialog.askstring(title="Student", prompt="S"))
-                lap_time = float(lap_time)
-                #(float(self.lap_time_entry.get())
-                lap_times.append(lap_time)
-                num_of_laps -=1
 
+        for num in range(num_of_laps):
+            #get the user input and convert it into a float value
+            lap_time = (simpledialog.askstring(title=f"Lap {num+1}", prompt=f"Enter time for lap {num+1}"))
+            lap_time = float(lap_time)
+
+            #add the entered value into the la_times list
+            lap_times.append(lap_time)
+            
+            #allows the loop to end and next user input to be added to the lap_times list
+            num_of_laps -=1
+
+        #sort the lap_times list in ascending order
         lap_times.sort()  
+
+        #calculate average using the sum method divided by the amount of values in lap_times list
         average = round(sum(lap_times)/len(lap_times),2)
+
+        #display result
         result_string = f'''
         Fastest: {lap_times[len(lap_times)-1]}
         Slowest: {lap_times[0]}
         Average: {average}
         '''
         self.results_tb.insert('1.0', result_string)
-    # print(f"Fastest: {lap_times[len(lap_times)-1]}")
-    # print(f"Slowest: {lap_times[0]}")
-    # print(f"Average: {average}")
 
 my_gui = myGUI()

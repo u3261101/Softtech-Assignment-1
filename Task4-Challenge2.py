@@ -7,3 +7,76 @@ Next, she calculates the number of calories that result from the carbohydrates, 
 calories from carbs = carb grams x 4 
 The nutritionist asks you to write a GUI program that will make these calculations
 '''
+
+import tkinter
+
+class myGUI:
+    def __init__(self):
+        self.main_window = tkinter.Tk()
+        self.main_window.title("Nutrition Tracker")
+
+        #create frames
+        self.fat_grams_frame = tkinter.Frame()
+        self.carb_grams_frame = tkinter.Frame()
+        self.button_frame = tkinter.Frame()
+        self.result_frame = tkinter.Frame()
+
+        #create label and entry
+        self.fat_grams_label = tkinter.Label(self.fat_grams_frame, text = "Enter the number of fat grams consumed in one day: ")
+        self.fat_grams_entry = tkinter.Entry(self.fat_grams_frame)
+        self.carb_grams_label = tkinter.Label(self.carb_grams_frame, text = "Enter the number of carbohydrate grams consumed in one day: ")
+        self.carb_grams_entry = tkinter.Entry(self.carb_grams_frame)
+        
+        #create buttons
+        display_button = tkinter.Button(self.button_frame, text = "Calculate", command= self.display)
+        quit_button = tkinter.Button(self.button_frame, text = "Quit", command= self.main_window.destroy)
+
+        #create text box
+        self.results_tb = tkinter.Text(self.result_frame, bg='lightblue')
+
+        #pack labels, entry, buttons and text box
+        self.fat_grams_label.pack(side='left')
+        self.fat_grams_entry.pack(side='left')
+        self.carb_grams_label.pack(side='left')
+        self.carb_grams_entry.pack(side='left')
+        display_button.pack(side='left')
+        quit_button.pack(side='left')
+        self.results_tb.pack()
+
+        #pack frames
+        self.fat_grams_frame.pack()
+        self.carb_grams_frame.pack()
+        self.button_frame.pack()
+        self.result_frame.pack()
+        
+        #Enter the tkinter main loop
+        tkinter.mainloop()
+
+    #take user input and display the result
+    def display(self):
+        #clear the text box
+        self.results_tb.delete('1.0', 'end')
+        
+        result_string = ""
+
+        #get user input and store it using relative variables
+        carb_grams = float(self.carb_grams_entry.get())
+        fat_grams = float(self.fat_grams_entry.get())
+        
+        #Using constants to avoid magic numbers
+        CRAB_MULTIPLIER = 4.0
+        FAT_MULTIPLIER = 3.9
+
+        #apply the formula provided
+        carbs = carb_grams * CRAB_MULTIPLIER 
+        fat =  fat_grams * FAT_MULTIPLIER
+
+
+        #display result
+        result_string = f'''
+        Carbohydrate grams per day: {carbs}
+                 Fat grams per day: {fat}
+        '''
+        self.results_tb.insert('1.0', result_string)
+
+my_gui = myGUI()
