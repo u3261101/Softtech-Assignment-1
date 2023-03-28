@@ -47,7 +47,7 @@ class myGUI:
 
         #clears the text box every time new entrys are displayed
         self.results_tb.delete('1.0', tkinter.END)
-
+        
         weight = float(self.Weight_entry.get())
         weight = weight*0.454
         result_string = f"Weight = {weight} kg"

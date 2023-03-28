@@ -65,14 +65,23 @@ class myGUI:
 
         #clears the text box every time new entrys are displayed
         self.results_tb.delete('1.0', tkinter.END)
+        
+        Quiz1 = self.Quiz1_entry.get()
+        Quiz2 = self.Quiz2_entry.get()
+        Quiz3 = self.Quiz3_entry.get()
+        Quiz4 = self.Quiz4_entry.get()
 
-        Quiz1 = int(self.Quiz1_entry.get())
-        Quiz2 = int(self.Quiz2_entry.get())
-        Quiz3 = int(self.Quiz3_entry.get())
-        Quiz4 = int(self.Quiz4_entry.get())
-        Total = Quiz1+Quiz2+Quiz3+Quiz4       
+        if Quiz1.isnumeric() and Quiz2.isnumeric() and Quiz3.isnumeric() and Quiz4.isnumeric():
+            Quiz1 = int(Quiz1)
+            Quiz2 = int(Quiz2)
+            Quiz3 = int(Quiz3)
+            Quiz4 = int(Quiz4)
+            Total = Quiz1+Quiz2+Quiz3+Quiz4     
+            result_string = f"The quiz marks for ST1 unit is {Total}"
+        else:
+            result_string = f"please enter a number"
+        
 
-        result_string = f"The quiz marks for ST1 unit is {Total}"
         self.results_tb.insert('1.0', result_string)
 
 my_gui = myGUI()

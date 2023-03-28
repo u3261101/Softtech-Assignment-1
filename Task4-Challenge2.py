@@ -60,23 +60,34 @@ class myGUI:
         result_string = ""
 
         #get user input and store it using relative variables
-        carb_grams = float(self.carb_grams_entry.get())
-        fat_grams = float(self.fat_grams_entry.get())
+        carb_grams = self.carb_grams_entry.get()
+        fat_grams = self.fat_grams_entry.get()
         
         #Using constants to avoid magic numbers
         CRAB_MULTIPLIER = 4.0
         FAT_MULTIPLIER = 3.9
 
         #apply the formula provided
-        carbs = carb_grams * CRAB_MULTIPLIER 
-        fat =  fat_grams * FAT_MULTIPLIER
-
-
-        #display result
-        result_string = f'''
-        Carbohydrate grams per day: {carbs}
-                 Fat grams per day: {fat}
+        if carb_grams.isnumeric() and fat_grams.isnumeric():
+            carb_grams = float(self.carb_grams_entry.get())
+            fat_grams = float(self.fat_grams_entry.get())
+            carbs = carb_grams * CRAB_MULTIPLIER 
+            fat =  fat_grams * FAT_MULTIPLIER
+            total = carbs+fat
+            #display result
+            result_string = f'''
+            Calories from carbs per day: {carbs}
+            Calories from fat per day: {fat}
+            Total calories: {total} kJ       
+            '''
+        else:
+            result_string = f'''
+        Please enter a numeric value
         '''
+        
         self.results_tb.insert('1.0', result_string)
+
+
+        
 
 my_gui = myGUI()

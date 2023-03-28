@@ -62,21 +62,29 @@ class myGUI:
         self.results_tb.delete('1.0', 'end')
         result_string = ""
         
+        A_tickets = self.class_A_entry.get()
+        B_tickets = self.class_B_entry.get()
+        C_tickets = self.class_C_entry.get()
         #price per seating category
         A_PRICE = 20
         B_PRICE = 15
         C_PRICE = 10
 
-        #store the amount of seats sold
-        A_tickets = float(self.class_A_entry.get())
-        B_tickets = float(self.class_B_entry.get())
-        C_tickets = float(self.class_C_entry.get())
+        if A_tickets.isnumeric() and B_tickets.isnumeric() and C_tickets.isnumeric():
+            #store the amount of seats sold
+            A_tickets = float(self.class_A_entry.get())
+            B_tickets = float(self.class_B_entry.get())
+            C_tickets = float(self.class_C_entry.get())
+            
 
-        #find the total by multiplying tickets sold by the price for each ticket
-        Total = A_tickets * A_PRICE + B_tickets * B_PRICE + C_tickets * C_PRICE
+            #find the total by multiplying tickets sold by the price for each ticket
+            Total = A_tickets * A_PRICE + B_tickets * B_PRICE + C_tickets * C_PRICE
 
-        #display result
-        result_string = f'Total income generated was ${Total}'
+            #display result
+            result_string = f'Total income generated was ${Total}'
+        else:
+            result_string = f'Please enter a number'
+        
         self.results_tb.insert('1.0', result_string)
 
 my_gui = myGUI()

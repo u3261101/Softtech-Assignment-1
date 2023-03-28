@@ -27,23 +27,12 @@ class myGUI:
         Years = 0
 
 # runs until year 5, calculating the end population based on the current year in each instance and displaying it using the tkinter module
-        while Years<=5:
+        while Years<=10:
             End_Population = POPULATION+((((IMMIGRATIONS_PER_YEAR+BIRTHS_PER_YEAR)-DEATHS_PER_YEAR)*Years))
-            self.label2 = tkinter.Label(self.main_window, text = f'Year {Years}: {int(End_Population):,}')
+            self.label2 = tkinter.Label(self.main_window, text = f'Year {Years}: {round(End_Population):,}')
             Years+=1
             self.label2.pack()
         tkinter.mainloop()
 
 
 my_gui = myGUI()
-
-
-
-
-'''
-def main():
-    ...
-
-if __name__ == "__main__":
-    main()
-'''
