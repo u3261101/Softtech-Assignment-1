@@ -3,7 +3,7 @@ Author: Akhil Prasad
 Date created: 28/03/23
 Date changed: 28/03/23
 
-This program calculates the YTM based on the user input of 
+This program calculates the YTM based on the user's input of 
         face value, market value, 
         interest rate and years of maturity
 
@@ -21,7 +21,8 @@ Approximate YTM
 #Asks for user input, goes through the formula and prints the YTM
 #Includes error validation included to avoid users typing letters to crash the program
 def main():
-    while True:
+    programRan = 0
+    while programRan < 1:
         try:
             value = float(input("Enter the face value of bond: "))
             interest = float(input("Enter the coupon interest rate: "))
@@ -35,10 +36,13 @@ def main():
         else:
             intr = calc_intr(interest, value)
             a = calc_a(value, price, years)
+            c = calc_a(100,1000,2)
             b = calc_b(value, price)
             ytm = round(calc_YTM(a, b, intr),2)
-
+            print("-------------",c)
+            print("----------------aaaaa", a)
             print(f'Approximate YTM = {ytm}%')
+            programRan += 1
             
 
 #calculates interest rate for the YTM formula based on user input
